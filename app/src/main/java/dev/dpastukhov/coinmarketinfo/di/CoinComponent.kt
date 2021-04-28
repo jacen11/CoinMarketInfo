@@ -5,17 +5,20 @@ import dagger.Component
 import dev.dpastukhov.coinmarketinfo.presentation.CoinListFragment
 
 @Component(
-    modules = [CoinModule::class]
+    modules = [
+        CoinModule::class,
+        PresentationModule::class,
+    ]
 )
 interface CoinComponent {
 
     fun inject(coinListFragment: CoinListFragment)
 
     @Component.Builder
-    interface Builder{
+    interface Builder {
 
         @BindsInstance
-        fun fragment(coinListFragment: CoinListFragment) : Builder
+        fun fragment(coinListFragment: CoinListFragment): Builder
 
         fun build(): CoinComponent
     }
