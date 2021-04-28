@@ -1,15 +1,17 @@
 package dev.dpastukhov.coinmarketinfo.data
 
+import androidx.annotation.Keep
 import com.google.gson.annotations.Expose
 
 import com.google.gson.annotations.SerializedName
 
-
+@Keep
 class Quote(
     @SerializedName("USD")
     private var usd: Usd? = null,
 )
 
+@Keep
 class Usd(
     @SerializedName("price")
     private val price: Double? = null,

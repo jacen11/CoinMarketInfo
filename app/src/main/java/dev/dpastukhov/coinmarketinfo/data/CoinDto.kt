@@ -1,10 +1,11 @@
 package dev.dpastukhov.coinmarketinfo.data
 
+import androidx.annotation.Keep
 import com.google.gson.annotations.Expose
 
 import com.google.gson.annotations.SerializedName
 
-
+@Keep
 class CoinDto(
     @SerializedName("id")
     private var id: Int? = null,
@@ -44,5 +45,4 @@ class CoinDto(
 
     @SerializedName("quote")
     private var quote: Quote? = null,
-
-    )
+)
