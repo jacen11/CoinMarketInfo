@@ -13,16 +13,14 @@ import dev.dpastukhov.coinmarketinfo.ViewModelFactory
 import dev.dpastukhov.coinmarketinfo.ViewModelKey
 import dev.dpastukhov.coinmarketinfo.data.CoinMarketServiceApi
 import dev.dpastukhov.coinmarketinfo.presentation.CoinListViewModel
-import okhttp3.*
+import okhttp3.Interceptor
+import okhttp3.OkHttpClient
+import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Retrofit
-import retrofit2.create
-import java.io.IOException
-import javax.inject.Provider
-import javax.inject.Singleton
-
 import okhttp3.logging.HttpLoggingInterceptor.Level.BASIC
 import okhttp3.logging.HttpLoggingInterceptor.Level.BODY
+import retrofit2.Retrofit
+import retrofit2.create
 
 @Module
 class CoinModule {
@@ -44,6 +42,12 @@ class CoinModule {
         logging.level = if (BuildConfig.DEBUG) BODY else BASIC
         val okHttp: OkHttpClient.Builder = OkHttpClient.Builder()
         okHttp.addInterceptor(logging)
+        okHttp.addInterceptor { chain ->
+            val requestBuilder = chain.request().newBuilder()
+            requestBuilder.header("Accept", "application/json")
+            requestBuilder.header("X-CMC_PRO_API_KEY", "fbbe5594-21dc-4a0f-9980-0d12549f7733")
+            chain.proceed(requestBuilder.build())
+        }
         return okHttp.build()
     }
 }

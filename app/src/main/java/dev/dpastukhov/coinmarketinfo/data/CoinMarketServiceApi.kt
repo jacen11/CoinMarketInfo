@@ -10,6 +10,6 @@ interface CoinMarketServiceApi {
         @Query("start") start: Int = 1,
         @Query("limit") limit: Int = 10,
         @Query("convert") convert: String = "BTC"
-    ): List<CoinDto>
+    ): ResultDto
 
 }
