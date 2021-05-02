@@ -21,11 +21,14 @@ class CoinListViewModel @Inject  constructor(private val interactor: CoinInterac
     private val defaultScope = viewModelScope + defaultExceptionHandler
 
     val listCoin = MutableLiveData<List<CoinDto>>()
+    val isLoading = MutableLiveData<Boolean>()
     val error: SingleLiveEvent<Unit> = SingleLiveEvent()
 
     fun setCoinList() {
         defaultScope.launch {
+            isLoading.value = true
             listCoin.value = interactor.getCoinList()
+            isLoading.value = false
         }
     }
 }

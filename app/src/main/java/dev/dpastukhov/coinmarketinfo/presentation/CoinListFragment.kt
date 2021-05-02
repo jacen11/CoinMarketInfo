@@ -17,9 +17,10 @@ import javax.inject.Inject
 
 class CoinListFragment : Fragment() {
 
-    @Inject lateinit var factory: ViewModelProvider.Factory
-    private val viewModel by viewModels<CoinListViewModel>{factory}
-   private lateinit var binding:CoinListFragmentBinding
+    @Inject
+    lateinit var factory: ViewModelProvider.Factory
+    private val viewModel by viewModels<CoinListViewModel> { factory }
+    private lateinit var binding: CoinListFragmentBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +30,6 @@ class CoinListFragment : Fragment() {
             .build()
             .inject(this)
 
-
     }
 
     override fun onCreateView(
@@ -38,14 +38,28 @@ class CoinListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = CoinListFragmentBinding.inflate(inflater,container,false)
+        binding = CoinListFragmentBinding.inflate(inflater, container, false)
 
         viewModel.setCoinList()
-        viewModel.error.observe(viewLifecycleOwner){
-             Snackbar.make(binding.root,"error",Snackbar.LENGTH_LONG).show()
+        viewModel.error.observe(viewLifecycleOwner) {
+            Snackbar.make(binding.root, "error", Snackbar.LENGTH_LONG).show()
         }
 
         return binding.root
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel.listCoin.observe(viewLifecycleOwner) {
+            binding.test.text = it.first().name
+        }
+
+        viewModel.isLoading.observe(viewLifecycleOwner) {
+            if (it != null) binding.swipeRefreshLayout.isRefreshing = it
+        }
+
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            viewModel.setCoinList()
+        }
     }
 }
