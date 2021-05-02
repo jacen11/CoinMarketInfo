@@ -20,7 +20,7 @@ class CoinListPagingSource @Inject constructor (
             LoadResult.Page(
                 data = data,
                 prevKey = if (nextPage == 1) null else nextPage - 1,
-                nextKey = nextPage + 1
+                nextKey = nextPage + params.loadSize
             )
         } catch (e: Exception) {
             LoadResult.Error(e)
