@@ -1,9 +1,10 @@
 package dev.dpastukhov.coinmarketinfo
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import dev.dpastukhov.coinmarketinfo.databinding.ActivityMainBinding
 import dev.dpastukhov.coinmarketinfo.presentation.CoinListFragment
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,6 +18,5 @@ class MainActivity : AppCompatActivity() {
 
         supportFragmentManager.beginTransaction().replace(R.id.container, CoinListFragment()).commit()
 
-        // DataBindingUtil.setContentView(this, R.layout.activity_main);
     }
 }

@@ -5,7 +5,7 @@ import retrofit2.http.Query
 
 interface CoinMarketServiceApi {
 
-    @GET("cryptocurrency/listings/latest/")
+    @GET("cryptocurrency/listings/latest")
     suspend fun getCoinList(
         @Query("start") start: Int = 1,
         @Query("limit") limit: Int = 10,
