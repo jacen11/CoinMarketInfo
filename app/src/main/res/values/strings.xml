@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">CoinMarketInfo</string>
     <string name="error_text">"Что-то пошло не так"</string>
+    <string name="titleName">Название</string>
+    <string name="titlePrice">Цена</string>
+    <string name="titlePercentChange">Изменение за час</string>
 </resources>

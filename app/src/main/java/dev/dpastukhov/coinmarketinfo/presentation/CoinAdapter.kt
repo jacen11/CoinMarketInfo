@@ -3,8 +3,6 @@ package dev.dpastukhov.coinmarketinfo.presentation
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -47,8 +45,8 @@ class CoinAdapter() :
 
         fun bind(model: CoinDto?) {
             binding.name.text = model?.name
-            binding.price.text = model?.quote?.usd?.price?.toString()
-            binding.percentChange1h.text = model?.quote?.usd?.percentChange1h?.toString()
+            binding.price.text = "${model?.quote?.usd?.price?.toString()} $"
+            binding.percentChange1h.text = "${model?.quote?.usd?.percentChange1h?.toString()} %"
         }
     }
 }
