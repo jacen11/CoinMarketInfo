@@ -46,7 +46,9 @@ class CoinAdapter() :
         private val binding = CoinItemBinding.bind(itemView)
 
         fun bind(model: CoinDto?) {
-            binding.test.text = model?.name
+            binding.name.text = model?.name
+            binding.price.text = model?.quote?.usd?.price?.toString()
+            binding.percentChange1h.text = model?.quote?.usd?.percentChange1h?.toString()
         }
     }
 }
