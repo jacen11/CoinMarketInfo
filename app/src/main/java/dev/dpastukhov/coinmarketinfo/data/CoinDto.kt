@@ -6,7 +6,7 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 @Keep
-class CoinDto(
+data class CoinDto(
     @SerializedName("id")
     val id: Int? = null,
     @SerializedName("name")

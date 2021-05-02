@@ -7,24 +7,24 @@ import com.google.gson.annotations.SerializedName
 
 class ResultDto(
     @SerializedName("status")
-    var status: Status? = null,
+    val status: Status? = null,
     @SerializedName("data")
-    var data: List<CoinDto>? = null
+    val data: List<CoinDto>
 )
 
 class Status(
     @SerializedName("timestamp")
-    var timestamp: String? = null,
+    val timestamp: String? = null,
     @SerializedName("error_code")
-    var errorCode: Int? = null,
+    val errorCode: Int? = null,
     @SerializedName("error_message")
-    var errorMessage: Any? = null,
+    val errorMessage: Any? = null,
     @SerializedName("elapsed")
-    var elapsed: Int? = null,
+    val elapsed: Int? = null,
     @SerializedName("credit_count")
-    var creditCount: Int? = null,
+    val creditCount: Int? = null,
     @SerializedName("notice")
-    var notice: Any? = null,
+    val notice: Any? = null,
     @SerializedName("total_count")
-    var totalCount: Int? = null,
+    val totalCount: Int? = null,
 )

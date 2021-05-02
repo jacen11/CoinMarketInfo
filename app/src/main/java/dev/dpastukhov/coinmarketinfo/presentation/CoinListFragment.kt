@@ -6,11 +6,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.paging.flatMap
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import dev.dpastukhov.coinmarketinfo.R
 import dev.dpastukhov.coinmarketinfo.databinding.CoinListFragmentBinding
 import dev.dpastukhov.coinmarketinfo.di.DaggerCoinComponent
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.InternalCoroutinesApi
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
@@ -49,9 +58,9 @@ class CoinListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.listCoin.observe(viewLifecycleOwner) {
-            binding.test.text = it.first().name
-        }
+//        viewModel.listCoin.observe(viewLifecycleOwner) {
+//            binding.test.text = it.first().name
+//        }
 
         viewModel.isLoading.observe(viewLifecycleOwner) {
             if (it != null) binding.swipeRefreshLayout.isRefreshing = it
@@ -60,5 +69,23 @@ class CoinListFragment : Fragment() {
         binding.swipeRefreshLayout.setOnRefreshListener {
             viewModel.setCoinList()
         }
+
+        var mainListAdapter: CoinAdapter = CoinAdapter()
+        binding .recyclerView.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = mainListAdapter
+        }
+
+        lifecycleScope.launch {
+            viewModel.listData.collect {
+                mainListAdapter.submitData(it)
+            }
+
+
+            viewModel.listData.collect {
+                mainListAdapter.submitData(it)
+            }
+        }
+
     }
 }
