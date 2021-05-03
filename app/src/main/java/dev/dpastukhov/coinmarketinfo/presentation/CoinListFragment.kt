@@ -63,15 +63,15 @@ class CoinListFragment : Fragment() {
 //        }
 
         viewModel.isLoading.observe(viewLifecycleOwner) {
-            if (it != null) binding.swipeRefreshLayout.isRefreshing = it
+            if (it != null) binding.swipeRefresh.isRefreshing = it
         }
 
-        binding.swipeRefreshLayout.setOnRefreshListener {
+        binding.swipeRefresh.setOnRefreshListener {
             viewModel.setCoinList()
         }
 
-        var mainListAdapter: CoinAdapter = CoinAdapter()
-        binding .recyclerView.apply {
+        val mainListAdapter = CoinAdapter()
+        binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = mainListAdapter
         }
