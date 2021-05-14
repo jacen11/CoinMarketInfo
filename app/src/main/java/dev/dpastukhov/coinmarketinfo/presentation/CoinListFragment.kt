@@ -43,7 +43,6 @@ class CoinListFragment : Fragment() {
 
         binding = CoinListFragmentBinding.inflate(inflater, container, false)
 
-        viewModel.setCoinList()
         viewModel.error.observe(viewLifecycleOwner) {
             Snackbar.make(binding.root, getString(R.string.error_text), Snackbar.LENGTH_LONG).show()
         }
@@ -53,9 +52,6 @@ class CoinListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        viewModel.listCoin.observe(viewLifecycleOwner) {
-//            binding.test.text = it.first().name
-//        }
 
         viewModel.isLoading.observe(viewLifecycleOwner) {
             if (it != null) binding.swipeRefresh.isRefreshing = it
@@ -72,11 +68,6 @@ class CoinListFragment : Fragment() {
         }
 
         lifecycleScope.launch {
-            viewModel.listData.collect {
-                mainListAdapter.submitData(it)
-            }
-
-
             viewModel.listData.collect {
                 mainListAdapter.submitData(it)
             }

@@ -36,9 +36,7 @@ class CoinListViewModel @Inject constructor(
     val isLoading = MutableLiveData<Boolean>()
     val error: SingleLiveEvent<Unit> = SingleLiveEvent()
 
-    val listData = Pager(PagingConfig(pageSize = 15)) {
-        CoinListPagingSource(serviceApi)
-    }.flow.cachedIn(viewModelScope)
+    val listData: Flow<PagingData<Coin>> = Pager(PagingConfig(pageSize = 15)) { CoinListPagingSource(serviceApi) }.flow.cachedIn(viewModelScope)
 
     fun setCoinList() {
         defaultScope.launch {
