@@ -13,9 +13,7 @@ import dev.dpastukhov.coinmarketinfo.ViewModelFactory
 import dev.dpastukhov.coinmarketinfo.ViewModelKey
 import dev.dpastukhov.coinmarketinfo.data.CoinMarketServiceApi
 import dev.dpastukhov.coinmarketinfo.presentation.CoinListViewModel
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.logging.HttpLoggingInterceptor.Level.BASIC
 import okhttp3.logging.HttpLoggingInterceptor.Level.BODY

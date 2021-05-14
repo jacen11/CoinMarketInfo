@@ -7,22 +7,21 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import dev.dpastukhov.coinmarketinfo.R
-import dev.dpastukhov.coinmarketinfo.data.CoinDto
 import dev.dpastukhov.coinmarketinfo.databinding.CoinItemBinding
+import dev.dpastukhov.coinmarketinfo.domain.Coin
 
-object UserComparator : DiffUtil.ItemCallback<CoinDto>() {
-    override fun areItemsTheSame(oldItem: CoinDto, newItem: CoinDto): Boolean {
+object UserComparator : DiffUtil.ItemCallback<Coin>() {
+    override fun areItemsTheSame(oldItem: Coin, newItem: Coin): Boolean {
         // Id is unique.
         return oldItem.name == newItem.name
     }
 
-    override fun areContentsTheSame(oldItem: CoinDto, newItem: CoinDto): Boolean {
+    override fun areContentsTheSame(oldItem: Coin, newItem: Coin): Boolean {
         return oldItem == newItem
     }
 }
 
-class CoinAdapter() :
-    PagingDataAdapter<CoinDto, CoinAdapter.CoinViewHolder>(UserComparator) {
+class CoinAdapter : PagingDataAdapter<Coin, CoinAdapter.CoinViewHolder>(UserComparator) {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -43,10 +42,10 @@ class CoinAdapter() :
 
         private val binding = CoinItemBinding.bind(itemView)
 
-        fun bind(model: CoinDto?) {
+        fun bind(model: Coin?) {
             binding.name.text = model?.name
-            binding.price.text = "${model?.quote?.usd?.price?.toString()} $"
-            binding.percentChange1h.text = "${model?.quote?.usd?.percentChange1h?.toString()} %"
+            binding.price.text = "${model?.price} $"
+            binding.percentChange1h.text = "${model?.percentChange1h} %"
         }
     }
 }

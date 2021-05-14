@@ -1,13 +1,14 @@
 package dev.dpastukhov.coinmarketinfo.data
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.viewModelScope
-import androidx.paging.*
-import retrofit2.http.Query
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import dev.dpastukhov.coinmarketinfo.domain.Coin
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class CoinRepository @Inject constructor(private val serviceApi: CoinMarketServiceApi) {
-    suspend fun getCoinList(start: Int = 1, limit: Int = 15, convert: String = "USD") =
+    suspend fun getCoinList(start: Int = 1, limit: Int = 15, convert: String = "USD"): Flow<PagingData<Coin>> =
         Pager(PagingConfig(pageSize = limit)) {
             CoinListPagingSource(serviceApi)
         }.flow
