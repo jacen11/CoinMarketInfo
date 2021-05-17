@@ -74,7 +74,7 @@ class CoinListFragment : Fragment() {
         }
 
         lifecycleScope.launchWhenCreated {
-            viewModel.listData.collectLatest {
+            viewModel.listData?.collectLatest {
                 mainListAdapter.submitData(it)
             }
         }

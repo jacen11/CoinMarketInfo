@@ -5,6 +5,6 @@ import javax.inject.Inject
 
 
 class CoinInteractor @Inject constructor(private val repository: CoinRepository) {
-    suspend fun getCoinList(start: Int = 1, limit: Int = 15, convert: String = "USD") =
-        repository.getCoinList(start, limit, convert)
+    suspend fun getCoinList(start: Int = 1, limit: Int = 15, convert: String = "USD"): List<Coin> =
+        repository.getCoinList(start, limit, convert).data.map { it.toModel() }
 }
