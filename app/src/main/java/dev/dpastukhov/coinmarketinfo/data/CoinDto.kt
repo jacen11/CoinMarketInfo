@@ -4,7 +4,7 @@ import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 
 @Keep
-data class CoinDto(
+class CoinDto(
     val id: Int? = null,
     val name: String = "",
     val symbol: String? = null,
